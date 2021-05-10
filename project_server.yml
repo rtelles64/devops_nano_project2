@@ -93,7 +93,7 @@ Resources:
     JumpBox:
         Type: AWS::EC2::Instance
         Properties:
-            SecurityGroups:
+            SecurityGroupIds:
                 - Ref: JumpBoxSecGroup
             SubnetId:
                 Fn::ImportValue:
@@ -104,7 +104,6 @@ Resources:
             Tags:
                 - Key: Name
                   Value: Jump Box
-
     # END: JumpBox
     # BEGIN: LaunchConfiguration
     WebAppLaunchConfig:
