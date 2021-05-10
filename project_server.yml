@@ -122,7 +122,8 @@ Resources:
             # The ID of the image we're trying to run (i.e. Linux, Windows,
             # Ubuntu, etc.)
             # In this case, it's a Linux machine
-            ImageId: ami-005bdb005fb00e791
+            # NOTE: Had to update ami due to constant failed health checks
+            ImageId: ami-0ac73f33a1888c64a
             # We can optionally apply an SSH key. Key Names must exist.
             # REMEMBER: Remove this when submitting as project
             KeyName: udacity-testinstance-keypair
@@ -209,7 +210,7 @@ Resources:
             # 10 seconds (see IntervalSeconds above) they they will be declared
             # healthy and start receiving traffic.
             HealthyThresholdCount: 2
-            Port: 8080
+            Port: 80
             Protocol: HTTP
             # ThresholdCount is basically the number of retries
             UnhealthyThresholdCount: 5
