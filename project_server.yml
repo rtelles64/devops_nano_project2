@@ -79,7 +79,7 @@ Resources:
             - IpProtocol: tcp
               FromPort: 22
               ToPort: 22
-              CidrIp: 67.180.154.49/32
+              CidrIp: <My IP>
             SecurityGroupEgress:
             # Establish the outbound openness. If our machine is trying to
             # connect or download some software patches, we want to be able
@@ -99,7 +99,7 @@ Resources:
                 Fn::ImportValue:
                     !Sub ${EnvironmentName}-PUB1-SN
             ImageId: ami-0cf6f5c8a62fa5da6
-            KeyName: udacity-testinstance-keypair
+            KeyName: <key pair name>
             InstanceType: t2.micro
             Tags:
                 - Key: Name
@@ -124,7 +124,7 @@ Resources:
             ImageId: ami-0ac73f33a1888c64a
             # We can optionally apply an SSH key. Key Names must exist.
             # REMEMBER: Remove this when submitting as project
-            KeyName: udacity-testinstance-keypair
+            KeyName: <key pair name>
             SecurityGroups:
             # Reference our security group defined above
             - Ref: WebServerSecGroup
