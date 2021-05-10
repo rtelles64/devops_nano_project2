@@ -67,6 +67,45 @@ Resources:
               ToPort: 65535
               CidrIp: 0.0.0.0/0
     # END: Security Group definitions
+    # BEGIN: JumpBox definition (and required aspects)
+    JumpBoxSecGroup:
+        Type: AWS::EC2::SecurityGroup
+        Properties:
+            GroupDescription: Enables SSH from local only
+            VpcId:
+                Fn::ImportValue:
+                    !Sub "${EnvironmentName}-VPCID"
+            SecurityGroupIngress:
+            - IpProtocol: tcp
+              FromPort: 22
+              ToPort: 22
+              CidrIp: 67.180.154.49/32
+            SecurityGroupEgress:
+            # Establish the outbound openness. If our machine is trying to
+            # connect or download some software patches, we want to be able
+            # to access the Internet unrestricted.
+            - IpProtocol: tcp
+              FromPort: 0
+              # Fun fact: There are a total of 65,535 TCP ports. This
+              #     corresponds to the largest 16-bit unsigned integer.
+              ToPort: 65535
+              CidrIp: 0.0.0.0/0
+    JumpBox:
+        Type: AWS::EC2::Instance
+        Properties:
+            SecurityGroups:
+                - Ref: JumpBoxSecGroup
+            SubnetId:
+                Fn::ImportValue:
+                    !Sub ${EnvironmentName}-PUB1-SN
+            ImageId: ami-0cf6f5c8a62fa5da6
+            KeyName: udacity-testinstance-keypair
+            InstanceType: t2.micro
+            Tags:
+                - Key: Name
+                  Value: Jump Box
+
+    # END: JumpBox
     # BEGIN: LaunchConfiguration
     WebAppLaunchConfig:
         Type: AWS::AutoScaling::LaunchConfiguration
