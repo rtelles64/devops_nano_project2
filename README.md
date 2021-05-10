@@ -34,11 +34,11 @@ CloudFormation script.
   1. Create a *Launch Configuration* for your application servers in 
 order to deploy four servers, two located in each of your private 
 subnets.
-    * The launch configuration will be used by an auto-scaling group
+      * The launch configuration will be used by an auto-scaling group
 
   2. You'll need two vCPUs and at least 4GB of RAM
-    * The OS to be used is `Ubuntu 18`
-    * Choose an Instance size and Machine Image (AMI) that best fits 
+      * The OS to be used is `Ubuntu 18`
+      * Choose an Instance size and Machine Image (AMI) that best fits 
 this spec
 
   3. Allocate at least 10GB of disk space so that you don't run into 
@@ -53,12 +53,12 @@ use the S3 service
   2. *Udagram* communicates on the default `HTTP Port: 80`, so your 
 servers will need this inbound port open since you'll use it with the 
 Load Balancer and the Load Balancer Health Check
-    * As for outbound, the servers will  need unrestricted internet 
+      * As for outbound, the servers will  need unrestricted internet 
 access to be able to download and update their software
 
   3. The load balancer should allow all public traffic (`0.0.0.0/0`) on 
 `port 80` inbound, which is the default `HTTP port`
-    * Outbound will only be using `port 80` to reach the internal 
+      * Outbound will only be using `port 80` to reach the internal 
 servers
 
   4. The application needs to be deployed into private subnets with a 
