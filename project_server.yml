@@ -219,10 +219,10 @@ Resources:
     # END: Load Balancer (& necessary components)
 Outputs:
     WebAppLB:
-        Description: A reference to the created Load Balancer
-        Value: !Ref WebAppLB
+        Description: A reference to the created Load Balancer's DNS Name
+        Value: !Sub http://${WebAppLB.DNSName}
         Export:
             # Takes the variabel EnvironmentName (i.e. UdacityProject) and
             # attaches "-VPCID" to it. It will also contain the actual ID of
             # the VPC that gets created.
-            Name: !Sub http://${WebAppLB.DNSName}
+            Name: !Sub ${EnvironmentName}-DNSNAME
