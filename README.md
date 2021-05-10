@@ -27,6 +27,49 @@ CloudFormation script.
 Develop a script to interpret the instructions and create a matching
 CloudFormation script.
 
+### Considerations
+
+  1. Deploy servers with an SSH Key into public subnets while creating 
+the script (this helps with troubleshooting)
+      * Once done, you can move them to your private subnets and remove 
+the SSH key from your *Launch Configuration*
+
+  2. It helps to test directly, without the load balancer
+      * Once you are confident the server is behaving correctly, 
+increase the instance count and add the load balancer to your script
+
+  3. While your instances are in public subnets, you'll also need the 
+SSH port open (`port 22`) for your access, in case you need to 
+troubleshoot instances
+
+  4. Log information for UserData scripts is located in 
+`cloud-init-output.log` under the `/var/log` folder
+
+  5. You should be able to destroy the entire infrastructure and build 
+it back up without any manual steps, other than running the 
+CloudFormation script itself
+
+  6. The provided UserData script should help install all the required 
+dependencies
+      * Bear in mind this process takes several minutes to complete
+      * Also, the application takes a few seconds to load
+      * This information is crucial for the settings for your load 
+balancer health check
+
+  7. It's up to you to decide which values should be parameters and 
+which you will hard-code in your script
+
+  8. (*Bonus*) Set up a bastion host (Jumpbox) to allow you to SSH into 
+your private subnet servers
+      * This bastion host should be on a public subnet with `port 22` 
+open only to your home `IP address`, and it would need to have the 
+private key used to access other servers
+
+> **REMEMBER**
+>
+> Delete the CloudFormation Stack when finished to avoid recurring 
+charges!
+
 ## Dependencies
 
 ### Server Specs
