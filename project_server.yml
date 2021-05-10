@@ -42,10 +42,10 @@ Resources:
                 Fn::ImportValue:
                     !Sub "${EnvironmentName}-VPCID"
             SecurityGroupIngress:
-            # Port 8080 is the standard access port
+            # Port 80 is the standard access port
             - IpProtocol: tcp
-              FromPort: 8080
-              ToPort: 8080
+              FromPort: 80
+              ToPort: 80
               CidrIp: 0.0.0.0/0
             # Port 22 indicates the SSH port
             # Ideally, you wouldn't have this port open (or any other port
